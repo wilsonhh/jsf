@@ -22,9 +22,9 @@
 		destroy-method="close">
 		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<beans:property name="url"
-			value="jdbc:mysql://localhost:3306/TestDB" />
-		<beans:property name="username" value="pankaj" />
-		<beans:property name="password" value="pankaj123" />
+			value="jdbc:mysql://localhost:3306/ranga" />
+		<beans:property name="username" value="ranga" />
+		<beans:property name="password" value="ranga" />
 	</beans:bean>
 
 	<!-- Hibernate 4 SessionFactory Bean definition -->
@@ -33,7 +33,8 @@
 		<beans:property name="dataSource" ref="dataSource" />
 		<beans:property name="annotatedClasses">
 			<beans:list>
-				<beans:value>com.journaldev.springhibernate.model.Person</beans:value>
+				<beans:value>com.wilson.model.Person</beans:value>
+				<beans:value>com.wilson.model.Employee</beans:value>
 			</beans:list>
 		</beans:property>
 		<beans:property name="hibernateProperties">
@@ -46,16 +47,25 @@
 	</beans:bean>
 
 	<beans:bean id="personDAO"
-		class="com.journaldev.springhibernate.dao.PersonDAOImpl">
+		class="com.wilson.dao.PersonDAOImpl">
 		<beans:property name="sessionFactory"
 			ref="hibernate4AnnotatedSessionFactory" />
 	</beans:bean>
 	<beans:bean id="personService"
-		class="com.journaldev.springhibernate.service.PersonServiceImpl">
+		class="com.wilson.service.PersonServiceImpl">
 		<beans:property name="personDAO" ref="personDAO"></beans:property>
 	</beans:bean>
+	<beans:bean id="employeeDAO"
+		class="com.wilson.dao.EmployeeDAOImpl">
+		<beans:property name="sessionFactory"
+			ref="hibernate4AnnotatedSessionFactory" />
+	</beans:bean>
+	<beans:bean id="employeeService"
+		class="com.wilson.service.EmployeeServiceImpl">
+		<beans:property name="employeeDAO" ref="employeeDAO"></beans:property>
+	</beans:bean>
 	
-	<context:component-scan base-package="com.journaldev" />
+	<context:component-scan base-package="com.wilson" />
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
